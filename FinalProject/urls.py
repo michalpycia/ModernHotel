@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from modernhotel.views import LandingPageView, LoginUserView, LogoutView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',  LoginUserView.as_view(), name='login-page'),
+    path('logout_user/', LogoutView.as_view(), name="logout-user"),
+    path('dashboard/', LandingPageView.as_view(), name='landing-page'),
 ]

@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Room booking system</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" title="style" />
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="/">Modern<b>HOTEL</b></a></h1>
+        </div>
+      </div>
+
+    </div>
+    <div id="site_content">
+
+      <div id="content">
+      <br>
+        {% block content %}
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_ul }}
+    <input type="submit" value="Log in">
+    </form>
+    {{ msg }}
+{% endblock %}
+
+  </div>
+  </div>
+
+</body>
+</html>

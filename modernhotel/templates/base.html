@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Room booking system</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" title="style" />
+</head>
+
+<body>
+    {% block login %}
+    {% if user.is_authenticated %}
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="/">Modern<b>HOTEL</b></a></h1>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+          <li><a href="/dashboard">Home</a></li>
+          <li><a href="new_reservation">New reservation</a></li>
+          <li><a href="/reservations">Reservations</a></li>
+          <li><a href="/rooms">Rooms</a></li>
+          <li><a href="/rooms">Element</a></li>
+            {% if user.is_superuser %}
+          <li><a href="/admin">Admin</a></li>
+                {% endif %}
+            <li><a href="/logout_user">Log out</a></li>
+
+
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+
+      <div id="content">
+        <!-- insert the page content here -->
+        <h1>Srodek</h1>
+
+  </div>
+    <div id="footer">
+        <a>Copyright Michal Pycia</a>
+    </div>
+    {% else %}
+        <h1>Forbidden, <a href="/"> login</a> first</h1>
+    {% endif %}
+    {% endblock %}
+</body>
+</html>
