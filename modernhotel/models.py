@@ -1,6 +1,6 @@
+from django.contrib.postgres.constraints import ExclusionConstraint
 from django.db import models
-from django.contrib.postgres.fields import DateRangeField
-
+from django.contrib.postgres.fields import DateRangeField, RangeOperators
 
 # Create your models here.
 from django.db.models import UniqueConstraint, Q
@@ -36,12 +36,21 @@ class Reservation(models.Model):
     contact_number = models.CharField(max_length=16)
     email = models.EmailField()
     comment = models.TextField(null=True)
+    cancelled = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.room_id}, {self.client_name} {self.client_surname}, {self.date_range}'
 
 
     class Meta:
-        constraints = [UniqueConstraint(fields=['room_id'], condition=Q(), name='unique_draft_user')]
+        #unique_together = ('room_id', 'date_range')
+        constraints = [
+            ExclusionConstraint(
+                name='exclude_overlapping_reservations',
+                expressions=[
+                    ('date_range', RangeOperators.OVERLAPS)
+                ]
+            )
+        ]
 
 
