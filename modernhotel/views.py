@@ -7,7 +7,7 @@ from django.views.generic import FormView, ListView
 from django.views.generic.edit import CreateView, DeleteView
 from django.urls import reverse_lazy, reverse
 
-from .forms import LoginUserForm
+from .forms import LoginUserForm, NewReservationForm, NewResForm
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 
@@ -37,3 +37,18 @@ class LogoutView(View):
     def get(self, request):
         logout(request)
         return HttpResponseRedirect(reverse('logout-user'))
+
+
+class RoomsView(View):
+    def get(self, request):
+        rooms = Room.objects.all()
+
+        return render(request, 'rooms.html', {'rooms': rooms})
+
+
+class NewReservationView(FormView):
+    form_class = NewResForm
+    template_name = 'modernhotel/reservation_form.html'
+    success_url = '/reservations'
+
+#class NewReservation(View):

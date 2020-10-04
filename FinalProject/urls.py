@@ -16,11 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from modernhotel.views import LandingPageView, LoginUserView, LogoutView
+from modernhotel.views import LandingPageView, LoginUserView, LogoutView, RoomsView, NewReservationView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',  LoginUserView.as_view(), name='login-page'),
     path('logout_user/', LogoutView.as_view(), name="logout-user"),
     path('dashboard/', LandingPageView.as_view(), name='landing-page'),
+    path('rooms/', RoomsView.as_view(), name='rooms'),
+    # path('rooms/<int:number>', RoomDetailsView.as_view(), name='rooms'),
+    path('new_reservation', NewReservationView.as_view(), name='new-reservation')
 ]

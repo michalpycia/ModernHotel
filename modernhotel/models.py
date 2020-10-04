@@ -29,7 +29,7 @@ class Room(models.Model):
 
 
 class Reservation(models.Model):
-    room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
     date_range = DateRangeField()
     client_name = models.CharField(max_length=256)
     client_surname = models.CharField(max_length=256)
@@ -39,18 +39,25 @@ class Reservation(models.Model):
     cancelled = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.room_id}, {self.client_name} {self.client_surname}, {self.date_range}'
-
+        return f'{self.room}, {self.client_name} {self.client_surname}, {self.date_range}'
 
     class Meta:
-        #unique_together = ('room_id', 'date_range')
         constraints = [
             ExclusionConstraint(
                 name='exclude_overlapping_reservations',
                 expressions=[
-                    ('date_range', RangeOperators.OVERLAPS)
-                ]
+                    ('date_range', RangeOperators.OVERLAPS),
+                    ('room', RangeOperators.EQUAL),
+                ],
+                condition=Q(cancelled=False),
             )
         ]
 
 
+class Client(models.Model):
+    client_name = models.CharField(max_length=256)
+    client_surname = models.CharField(max_length=256)
+    contact_number = models.CharField(max_length=16, unique=True)
+
+    def __str__(self):
+        return f'{self.client_name} {self.client_surname} - Contact number: {self.contact_number}'

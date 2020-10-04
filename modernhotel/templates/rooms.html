@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Rooms list:</h1>
+    <table>
+        <thead>
+        <tr class="d-flex">
+            <th scope="col" class="col-1">Room number</th>
+            <th scope="col" class="col-2">Price</th>
+            <th scope="col" class="col-2">Room type</th>
+            <th scope="col" class="col-7">Bed type</th>
+            <th scope="col" class="col-2">AC</th>
+            <th scope="col" class="col-2">Reservations</th>
+        </tr>
+        </thead>
+        <tbody class="text-color-lighter">
+            {% for room in rooms %}
+            <tr class="d-flex">
+            <th scope="row" class="col-2">{{ room.number }}</th>
+            <td class="col-2">{{ room.price}} $</td>
+            <td class="col-2">{{ room.room_type}}</td>
+            <td class="col-2">{{ room.bed_type }}</td>
+            <td class="col-2">{{ room.air_conditioner }}</td>
+            <td class="col-2"><a href="/rooms/{{ room.number }}">Check</td>
+{#            <td class="col-2 d-flex align-items-center justify-content-center flex-wrap">#}
+{#                <a href="#"#}
+{#                   class="btn btn-danger rounded-0 text-light m-1 ">Usuń</a>#}
+{#                <a href="/room/{{ recipe.id }}"#}
+{#                   class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>#}
+{#                <a href="/recipe/modify/{{ recipe.id }}"#}
+{#                   class="btn btn-warning rounded-0 text-light m-1">Edytuj</a>#}
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}
