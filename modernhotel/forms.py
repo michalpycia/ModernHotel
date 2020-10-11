@@ -3,7 +3,7 @@ from django.contrib.admin.widgets import AdminDateWidget
 from django.contrib.auth.models import User
 from django.contrib.postgres.forms import RangeWidget
 
-from modernhotel.models import Reservation
+from modernhotel.models import Reservation, Room
 
 
 class LoginUserForm(forms.Form):
@@ -25,3 +25,14 @@ class NewReservationForm(forms.ModelForm):
         fields = '__all__'
 
 
+class ReservationEditForm(forms.ModelForm):
+    class Meta:
+        model = Reservation
+        fields = '__all__'
+
+
+class RoomEditForm(forms.ModelForm):
+    class Meta:
+        model = Room
+        fields = '__all__'
+        widgets = {'number': forms.HiddenInput()}

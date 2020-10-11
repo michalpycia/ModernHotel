@@ -29,9 +29,9 @@
           <li><a href="/new_reservation">New reservation</a></li>
           <li><a href="/reservations">Reservations</a></li>
           <li><a href="/rooms">Rooms</a></li>
-{#            {% if user.is_superuser %}#}
-{#          <li><a href="/admin">Admin</a></li>#}
-{#                {% endif %}#}
+            {% if user.is_superuser %}
+          <li><a href="/admin">Admin</a></li>
+                {% endif %}
             <li><a href="/logout_user">Log out</a></li>
 
 
@@ -47,17 +47,6 @@
         <h4><a href="check_in">Check in reservation</a></h4>
         <p>Use that button to confirm guest arrival<br/></p>
         <br>
-        <h4><a href="check_in">Show future arrivals</a></h4>
-        <p>Show future arrivals<br/></p>
-        <br>
-        <h4><a href="check_in">Show past reservations</a></h4>
-        <p>Show list of past reservations<br/></p>
-        <br>
-        <h4><a href="check_in">Cancel reservation</a></h4>
-        <p>Cancel reservation<br/></p>
-        <br>
-        <h4><a href="check_in">Check in reservation</a></h4>
-        <p>Use that button to confirm guest arrival<br/></p>
       </div>
       <br>
         {% block content %}

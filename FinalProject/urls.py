@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from modernhotel.views import LandingPageView, LoginUserView, LogoutView, RoomsView, NewReservationView, \
-    ReservationsView, RoomDetailsView, ReservationsViewOrder
+    ReservationsView, RoomDetailsView, ReservationsViewOrder, ReservationEditView, RoomEditView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,4 +28,6 @@ urlpatterns = [
     path('room/<int:room_number>', RoomDetailsView.as_view()),
     path('new_reservation', NewReservationView.as_view(), name='new-reservation'),
     path('reservations', ReservationsViewOrder.as_view(), name='reservations'),
+    path('reservations/<int:pk>', ReservationEditView.as_view(), name='reservation-edit'),
+    path('room/<int:pk>/edit', RoomEditView.as_view(), name='room-edit'),
 ]

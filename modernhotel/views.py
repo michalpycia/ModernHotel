@@ -1,14 +1,15 @@
 from django.core.paginator import Paginator
 from django.db import IntegrityError
+from django.db.models import Q
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.views.generic import FormView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy, reverse
 
-from .forms import LoginUserForm, NewReservationForm
+from .forms import LoginUserForm, NewReservationForm, ReservationEditForm, RoomEditForm
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 
@@ -44,8 +45,15 @@ class LogoutView(View):
 
 class RoomsView(View):
     def get(self, request):
-        rooms = Room.objects.all()
+        rooms_q = Room.objects.all()
+        rooms = self.paginator(request, rooms_q)
         return render(request, 'rooms.html', {'rooms': rooms})
+
+    def paginator(self, request, reservations):
+        paginator = Paginator(reservations, 25)
+        page = request.GET.get('page')
+        pagination = paginator.get_page(page)
+        return pagination
 
 
 class NewReservationView(CreateView):
@@ -80,8 +88,8 @@ class ReservationsView(View):
 class RoomDetailsView(View):
     def get(self, request, room_number):
         room = Room.objects.get(number=room_number)
-        reservations = Reservation.objects.filter(room=room, check_in=False, check_out=False).order_by('date_range')
-        reservations_past = Reservation.objects.filter(room=room, check_in=True, check_out=True).order_by('date_range')
+        reservations = Reservation.objects.filter(room=room).order_by('date_range')
+        reservations_past = Reservation.objects.filter(room=room).order_by('date_range')
         return render(request, 'room_detail.html',
                       {'room': room, 'reservations': reservations, 'reservations_past': reservations_past})
 
@@ -95,7 +103,7 @@ class RoomPriceView(View):
 class ReservationsViewOrder(View):
 
     def get(self, request):
-        all = Reservation.objects.all().order_by('-date_range')
+        all_res = Reservation.objects.all().order_by('-date_range')
         stay_active_query = Reservation.objects.filter(check_in=True, check_out=False, cancelled=False).order_by(
             '-date_range')
         stay_active = self.paginator(request, stay_active_query)
@@ -111,16 +119,50 @@ class ReservationsViewOrder(View):
         newest_query = Reservation.objects.filter(check_in=False, check_out=False, cancelled=False).order_by('-id')
         newest = self.paginator(request, newest_query)
         return render(request, 'reservations.html',
-                      {"all": all, "stay_active": stay_active, "check_in_expected": check_in_expected,
+                      {"all_res": all_res, "stay_active": stay_active, "check_in_expected": check_in_expected,
                        "past": past, "cancelled": cancelled, "newest": newest})
-
-    def paginator(self, request, reservations):
-        paginator = Paginator(reservations, 50)
-        page = request.GET.get('page')
-        reservations = paginator.get_page(page)
-        return reservations
 
     def post(self, request):
         reservation_search = request.POST.get('reservation_search')
-        search = Reservation.objects.filter(client_name__iexact=reservation_search).order_by('-date_range')
-        return render(request, 'reservations.html', {"search": search})
+        search = Reservation.objects.filter(
+            Q(client_name__iexact=reservation_search) | Q(client_surname__iexact=reservation_search))
+        return render(request, 'reservations_search.html', {"search": search})
+
+    def paginator(self, request, reservations):
+        paginator = Paginator(reservations, 100)
+        page = request.GET.get('page')
+        pagination = paginator.get_page(page)
+        return pagination
+
+
+class ReservationEditView(UpdateView):
+    form_class = ReservationEditForm
+    template_name = 'modernhotel/reservation_update_form.html'
+    queryset = Reservation.objects.all()
+    success_url = '/reservations'
+
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(Reservation, pk=pk)
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super().form_valid(form)
+
+
+class RoomEditView(UpdateView):
+    form_class = RoomEditForm
+    template_name = 'edit_room.html'
+    queryset = Room.objects.all()
+    success_url = '/rooms'
+
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        return get_object_or_404(Room, pk=pk)
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super().form_valid(form)
+
+
+

@@ -4,22 +4,9 @@
     <script type="text/JavaScript" src="{% static 'reservations.js' %}"></script>
 
 
-    <ul>
-        <li id="all_li">All reservations</li>
-        <li id="current_li">Current</li>
-        <li id="newest_li">Newest</li>
-        <li id="expected_li">Arrivals</li>
-        <li id="past_li">Past</li>
-        <li id="cancelled_li">Cancelled</li>
-    </ul>
-    <div>
-        <form action="" method="post">
-            <input type="text" name="reservation_search">
-            <input type="submit" value="Search">
-            {% csrf_token %}
-        </form>
+
     </div>
-      <div id="search">
+    <p><a href="reservations">Back to reservations</a></p>
         <h1>Search results:</h1>
         <table>
             <thead>
@@ -40,7 +27,7 @@
             <tbody class="text-color-lighter">
             {% for res in search %}
                 <tr class="d-flex">
-                    <th scope="row" class="col-1">{{ res.id }}</th>
+                    <th scope="row" class="col-1"><a href="reservations/{{ res.id }}">Res-{{ res.id }}</a></th>
                     <th class="col-2">{{ res.room }}</th>
                     <td class="col-2">{{ res.room.price }} $</td>
                     <td class="col-2">{{ res.date_range }}</td>
@@ -57,5 +44,4 @@
             </tbody>
         </table>
         <hr>
-    </div>
 {% endblock %}

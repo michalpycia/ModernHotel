@@ -39,7 +39,11 @@ h5, h6
 a, a:hover
 { outline: none;
   text-decoration: underline;
-  color: #000;}
+  color: #000000;}
+a, a:hover
+{ outline: none;
+  text-decoration: underline;
+  color: #000000;}
 
 a:hover
 { text-decoration: none;}
@@ -178,11 +182,12 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
 
 .sidebar li a, .sidebar li a:hover
 { padding: 0 0 0 40px;
+  color: #1e556a;
   display: block;
   background: transparent url(link.png) no-repeat left center;} 
 
 .sidebar li a.selected
-{ color: #7E2451;
+{ color: #1e556a;
   text-decoration: none;} 
 
 #content
@@ -199,7 +204,14 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
   background: url(bullet.png) no-repeat;
   margin: 0 0 6px 0; 
   padding: 0 0 4px 25px;
-  line-height: 1.5em;}
+  line-height: 1.5em;
+  display: inline-block;
+  position: relative;
+  }
+#content ul li a {
+  color: #1e556a;
+}
+
 
 #footer {
   width: 80%;
@@ -323,23 +335,12 @@ hr{
   margin-top: 10px;
 }
 
-#paging a {
-  color: #000;
-  background: #e0e0e0;
-  padding: 8px 12px;
-  margin-right: 5px;
-  text-decoration: none;
+#pagination {
+  width: 100%;
+  text-align: center;
 }
 
-#paging a.aktif {
-  background: #000 !important;
-  color: #fff;
-}
-
-#paging a:hover {
-  border: 1px solid #000;
-}
-
-.hidden {
-  display: none;
+#pagination ul li {
+  display: inline;
+  margin-left: 10px;
 }
