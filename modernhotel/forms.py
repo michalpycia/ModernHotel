@@ -12,15 +12,16 @@ class LoginUserForm(forms.Form):
 
 
 class NewReservationForm(forms.ModelForm):
+    def clean_date_range(self):
+        date_range = str(self.cleaned_data['date_range'])
+        date_start = date_range[1:11]
+        date_stop = date_range[13:23]
+        if date_start == date_stop:
+            raise forms.ValidationError("Reservation must include at least 1 night")
+        return self.cleaned_data['date_range']
+
     class Meta:
         model = Reservation
         fields = '__all__'
 
 
-class NewResForm(forms.ModelForm):
-    class Meta:
-        model = Reservation
-        fields = "__all__"
-        widgets = {
-            'date_range': RangeWidget(AdminDateWidget())
-        }

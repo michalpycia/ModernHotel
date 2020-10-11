@@ -7,8 +7,9 @@ html
 
 body
 { font: normal .80em 'trebuchet ms', arial, sans-serif;
-  background: #F0EFE2 url(background.png) repeat;
-  color: #000;}
+  background: #47433F url(background.png) repeat;
+  color: #000;
+}
 
 p
 { padding: 0 0 20px 0;
@@ -20,7 +21,7 @@ img
 h1, h2, h3, h4, h5, h6 
 { font: normal 175% 'century gothic', arial, sans-serif;
   color: #000;
-  margin: 0 0 15px 0;
+  margin: 0 0 10px 0;
   padding: 15px 0 5px 0;}
 
 h2
@@ -90,7 +91,7 @@ ol li
 { width: 80%;
   position: relative;
   height: 110px;
-  border-bottom: 2px solid #FFF;}
+  border-bottom: 2px solid #1e556b;}
 
 #logo #logo_text 
 { position: absolute; 
@@ -121,7 +122,7 @@ ol li
 { width: 80%;
   height: 48px;
   padding: 0;
-  background: slategray;}
+  background: #1e556b;}
 
 ul#menu, ul#menu li
 { float: left;
@@ -149,12 +150,12 @@ ul#menu li a
 }
 
 ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
-{ color: lightskyblue;
+{ color: #1e556a;
   background: transparent url(transparent_light.png) repeat;
   border-radius: 1%;}
 
 #site_content
-{ width: 79%;
+{ width: 80%;
   overflow: hidden;
   margin: 0 auto 0 auto;
   padding: 0 24px 20px 20px;
@@ -172,7 +173,8 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
 
 .sidebar li
 { list-style: none; 
-  padding: 0 0 7px 0; }
+  padding: 0 0 7px 0;
+}
 
 .sidebar li a, .sidebar li a:hover
 { padding: 0 0 0 40px;
@@ -185,8 +187,8 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
 
 #content
 { text-align: left;
-  float: left;
-  width: 595px;
+  float: inside;
+  width: 100%;
   padding: 0;}
 
 #content ul
@@ -209,17 +211,15 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
   color: black;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  display: inline-flex
 }
 
 
 #footer a
-{ color: #000000;
-  text-decoration: none;
-  text-align: center}
+{ color: #FFF;
+  text-decoration: none;}
 
 #footer a:hover
-{ color: red;
+{ color: palegreen;
   text-decoration: underline;}
 
 .search
@@ -286,15 +286,60 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
   margin: 0 0 20px 0;}
   
 table
-{ margin: 10px 0 30px 0;}
+{ margin: 10px 0 30px 0;
+  width: 70%;
+}
 
 table tr th, table tr td
-{ background: #3B3B3B;
+{ background: #1e556a;
   color: #FFF;
   padding: 7px 4px;
-  text-align: left;}
+  text-align: left;
+}
   
-table tr td
-{ background: #F0EFE2;
-  color: #47433F;
-  border-top: 1px solid #FFF;}
+table tr td {
+  background: #F0EFE2;
+  color: #1e556a;
+  border-top: 1px solid #FFF;
+}
+
+input[type=submit] {
+  background-color: #1e556a;
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+}
+hr{
+  width: 70%;
+}
+
+#paging {
+  padding: 0 20px 20px 20px;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+#paging a {
+  color: #000;
+  background: #e0e0e0;
+  padding: 8px 12px;
+  margin-right: 5px;
+  text-decoration: none;
+}
+
+#paging a.aktif {
+  background: #000 !important;
+  color: #fff;
+}
+
+#paging a:hover {
+  border: 1px solid #000;
+}
+
+.hidden {
+  display: none;
+}

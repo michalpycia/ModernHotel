@@ -120,3 +120,4 @@ except ModuleNotFoundError:
     print("missing configuration in local_settings.py!")
     print("Check local_settings.py")
     exit(0)
+
