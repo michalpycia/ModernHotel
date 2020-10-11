@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Rooms list:</h1>
+    <div>
+                <div class="pagination">
+    <span class="step-links">
+        {% if rooms.res.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ rooms.previous_page_number }}">previous</a>
+        {% endif %}
+      {% for pg in rooms.paginator.page_range %}
+        {% if rooms.number == pg %}
+          <a href="?page={{pg}}" style="display: inline-flex">{{pg}}</a> |
+        {% else %}
+          <a href="?page={{pg}}" style="display: inline-flex">{{pg}}</a> |
+        {% endif %}
+      {% endfor %}
+        {% if rooms.has_next %}
+            <a href="?page={{ rooms.next_page_number }}">next</a>
+            <a href="?page={{ rooms.paginator.num_pages }}">last&raquo;</a>
+        {% endif %}
+    </span>
+</div>
+    <table>
+        <thead>
+        <tr class="d-flex">
+            <th scope="col" class="col-1">Room number</th>
+            <th scope="col" class="col-2">Suggested Price</th>
+            <th scope="col" class="col-2">Room type</th>
+            <th scope="col" class="col-7">Bed type</th>
+            <th scope="col" class="col-2">AC</th>
+            <th scope="col" class="col-2">Reservations</th>
+            <th scope="col" class="col-2">Edit room</th>
+        </tr>
+        </thead>
+        <tbody class="text-color-lighter">
+            {% for room in rooms %}
+            <tr class="d-flex">
+            <th scope="row" class="col-2">{{ room.number }}</th>
+            <td class="col-2">{{ room.price}} $</td>
+            <td class="col-2">{{ room.room_type}}</td>
+            <td class="col-2">{{ room.bed_type }}</td>
+            <td class="col-2">{{ room.air_conditioner }}</td>
+            <td class="col-2"><a href="/room/{{ room.number }}">Check</td>
+            <td class="col-2"><a href="/room/{{ room.number }}/edit">Click</td>
+
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+            <div class="pagination">
+    <span class="step-links">
+        {% if rooms.res.has_previous %}
+            <a href="?page=1">&laquo; pierwsza</a>
+            <a href="?page={{ rooms.previous_page_number }}">poprzednia</a>
+        {% endif %}
+      {% for pg in rooms.paginator.page_range %}
+        {% if rooms.number == pg %}
+          <a href="?page={{pg}}" style="display: inline-flex">{{pg}}</a> |
+        {% else %}
+          <a href="?page={{pg}}" style="display: inline-flex">{{pg}}</a> |
+        {% endif %}
+      {% endfor %}
+        {% if rooms.has_next %}
+            <a href="?page={{ rooms.next_page_number }}">następna</a>
+            <a href="?page={{ rooms.paginator.num_pages }}">ostatnia&raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+{% endblock %}

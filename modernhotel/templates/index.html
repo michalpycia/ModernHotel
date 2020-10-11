@@ -27,11 +27,19 @@
       <br>
         {% block content %}
     <form method="post">
+    <table>
+    <tbody class="text-color-lighter">
+    <tr class="d-flex">
+
     {% csrf_token %}
-    {{ form.as_ul }}
+            {{ form.as_table }}
+
+
+    </tr>
+        </tbody>
+    </table>
     <input type="submit" value="Log in">
     </form>
-    {{ msg }}
 {% endblock %}
 
   </div>

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <script type="text/JavaScript" src="{% static 'reservations.js' %}"></script>
+
+
+
+    </div>
+    <p><a href="reservations">Back to reservations</a></p>
+        <h1>Search results:</h1>
+        <table>
+            <thead>
+            <tr class="d-flex">
+                <th scope="col" class="col-1">Reservation</th>
+                <th scope="col" class="col-2">Room number</th>
+                <th scope="col" class="col-2">Price for day</th>
+                <th scope="col" class="col-2">Dates</th>
+                <th scope="col" class="col-2">Days</th>
+                <th scope="col" class="col-2">Client Name</th>
+                <th scope="col" class="col-2">Client Surname</th>
+                <th scope="col" class="col-2">Arrival</th>
+                <th scope="col" class="col-2">Comments</th>
+                <th scope="col" class="col-2">Contact</th>
+                <th scope="col" class="col-2">Charge</th>
+            </tr>
+            </thead>
+            <tbody class="text-color-lighter">
+            {% for res in search %}
+                <tr class="d-flex">
+                    <th scope="row" class="col-1"><a href="reservations/{{ res.id }}">Res-{{ res.id }}</a></th>
+                    <th class="col-2">{{ res.room }}</th>
+                    <td class="col-2">{{ res.room.price }} $</td>
+                    <td class="col-2">{{ res.date_range }}</td>
+                    <td class="col-2">{{ res.duration }}</td>
+                    <td class="col-2">{{ res.client_name }}</td>
+                    <td class="col-2">{{ res.client_surname }}</td>
+                    <td class="col-2">{{ res.arrival }}</td>
+                    <td class="col-2">{{ res.comment }}</td>
+                    <td class="col-2">{{ res.contact_number }}</td>
+                    <td class="col-2">{% widthratio res.room.price 1 res.duration %}$</td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+        <hr>
+{% endblock %}
