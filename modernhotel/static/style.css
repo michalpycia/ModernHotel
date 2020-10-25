@@ -70,13 +70,30 @@ blockquote
   background: #FFF;}
 
 ul
-{ margin: 2px 0 22px 17px;}
+{ margin: 2px 0 22px 17px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;}
 
 ul li
-{ list-style-type: circle;
+{ list-style-type: none;
   margin: 0 0 6px 0; 
-  padding: 0 0 4px 5px;}
+  padding: 0 0 4px 5px;
+  display: inline-block;
+  }
+ul li a
+{  background-color: #1e556a;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: greenyellow;
+  display: inline-block;
+  border: #1e556a;
+  }
+ul li a:hover, a:active {
+  background-color: white;
 
+}
 ol
 { margin: 8px 0 22px 20px;}
 
@@ -173,7 +190,9 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
 .sidebar ul
 { width: 198px; 
   padding: 4px 0 0 0; 
-  margin: 4px 0 30px 0;}
+  margin: 4px 0 30px 0;
+
+}
 
 .sidebar li
 { list-style: none; 
@@ -197,15 +216,16 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
   padding: 0;}
 
 #content ul
-{ margin: 2px 0 22px 0px;}
+{ margin: 2px 0 22px 0px;
+  list-style-type: none;
+}
 
 #content ul li
-{ list-style-type: none;
-  background: url(bullet.png) no-repeat;
+{ background: url(bullet.png) no-repeat;
   margin: 0 0 6px 0; 
   padding: 0 0 4px 25px;
   line-height: 1.5em;
-  display: inline-block;
+  display: inline-grid;
   position: relative;
   }
 #content ul li a {
@@ -274,7 +294,12 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
   padding: 2px 0 3px 0;
   cursor: pointer; 
   background: #000; 
-  color: #FFF;}
+  color: #FFF;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+
 
 .form_settings textarea, .form_settings select
 { font: 100% arial; 
@@ -299,7 +324,7 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
   
 table
 { margin: 10px 0 30px 0;
-  width: 70%;
+  width: 100%;
 }
 
 table tr th, table tr td
@@ -324,6 +349,10 @@ input[type=submit] {
   text-decoration: none;
   display: inline-block;
   font-size: 12px;
+}
+input[type=submit]:hover, input[type=submit]:active {
+  background-color: white;
+  color: black;
 }
 hr{
   width: 70%;

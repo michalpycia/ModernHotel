@@ -25,33 +25,19 @@
       <div id="menubar">
         <ul id="menu">
           <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
-          <li><a href="/">Home</a></li>
+          <li><a href="/">Reservations</a></li>
           <li><a href="/new_reservation">New reservation</a></li>
-          <li><a href="/reservations">Reservations</a></li>
           <li><a href="/rooms">Rooms</a></li>
             {% if user.is_superuser %}
           <li><a href="/admin">Admin</a></li>
                 {% endif %}
             <li><a href="/logout_user">Log out</a></li>
-
-
         </ul>
       </div>
     </div>
     <div id="site_content">
-
-      <div id="content">
-      <div class="sidebar">
-        <!-- insert your sidebar items here -->
-        <h3>Quick menu</h3>
-        <h4><a href="check_in">Check in reservation</a></h4>
-        <p>Use that button to confirm guest arrival<br/></p>
-        <br>
-      </div>
-      <br>
         {% block content %}
             {% endblock %}
-
   </div>
   </div>
     <div id="footer">

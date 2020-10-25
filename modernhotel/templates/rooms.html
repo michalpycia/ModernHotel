@@ -42,7 +42,7 @@
             <td class="col-2">{{ room.bed_type }}</td>
             <td class="col-2">{{ room.air_conditioner }}</td>
             <td class="col-2"><a href="/room/{{ room.number }}">Check</td>
-            <td class="col-2"><a href="/room/{{ room.number }}/edit">Click</td>
+            <td class="col-2"><a href="/room/{{ room.id }}/edit">Click</td>
 
             </tr>
         {% endfor %}
@@ -52,8 +52,8 @@
             <div class="pagination">
     <span class="step-links">
         {% if rooms.res.has_previous %}
-            <a href="?page=1">&laquo; pierwsza</a>
-            <a href="?page={{ rooms.previous_page_number }}">poprzednia</a>
+            <a href="?page=1">first</a>
+            <a href="?page={{ rooms.previous_page_number }}">previous</a>
         {% endif %}
       {% for pg in rooms.paginator.page_range %}
         {% if rooms.number == pg %}
@@ -63,8 +63,8 @@
         {% endif %}
       {% endfor %}
         {% if rooms.has_next %}
-            <a href="?page={{ rooms.next_page_number }}">następna</a>
-            <a href="?page={{ rooms.paginator.num_pages }}">ostatnia&raquo;</a>
+            <a href="?page={{ rooms.next_page_number }}">next</a>
+            <a href="?page={{ rooms.paginator.num_pages }}">last</a>
         {% endif %}
     </span>
 </div>
